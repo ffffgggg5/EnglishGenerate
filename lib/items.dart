@@ -1,5 +1,3 @@
-
-
 // ドロップダウンの初期値を設定
 String dropdownValueLength = '50';
 String dropdownValueLevel = 'Lv.7 高校1年生';
@@ -39,7 +37,6 @@ List<String> itemsStyle = [
   '説明書',
   '広告',
 ];
-
 
 String getLevelDescription(String originalLevel) {
   switch (originalLevel) {
@@ -89,7 +86,6 @@ String getLevelDescription(String originalLevel) {
       return originalLevel; // 入力されたレベルがリストにない場合は元の文言を返す
   }
 }
-
 
 String getStyleDescription(String originalStyle) {
   switch (originalStyle) {

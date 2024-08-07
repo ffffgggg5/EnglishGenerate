@@ -11,8 +11,12 @@ dependencies:
   chat_gpt_sdk: ^2.2.5
   http: ^0.13.4
   flutter_dotenv: ^5.0.2
-  flutter_tts: ^4.0.2
   settings_ui: ^2.0.2
+  flutter_azure_tts: ^0.1.6
+  audioplayers: ^0.20.1
+  path_provider: ^2.0.9
+  sqflite: ^2.0.0+4
+  path: ^1.9.0  
 
 
 dev_dependencies:
