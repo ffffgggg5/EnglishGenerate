@@ -252,7 +252,7 @@ class _SecondPageState extends State<SecondPage> {
                     });
                     print(textJapanese);
                   },
-                  child: Text('和訳を表示'),
+                  child: Text('訳を表示'),
                 ),
                 AudioPlayerWidget(audioFilePath: audioFilePath),
               ],

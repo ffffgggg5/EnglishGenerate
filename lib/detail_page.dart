@@ -78,38 +78,47 @@ class _DetailPageState extends State<DetailPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Text(
-                'テーマ: ${widget.item['theme'] ?? 'N/A'}',
-                style: TextStyle(fontSize: 16),
+        child: Column(
+          children: [
+            Column(
+              children: [
+                Text(
+                  'テーマ: ${widget.item['theme'] ?? 'N/A'}',
+                  style: TextStyle(fontSize: 16),
+                ),
+                Text(
+                  '語数: ${widget.item['length'] ?? 'N/A'}',
+                  style: TextStyle(fontSize: 16),
+                ),
+                Text(
+                  'レベル: ${widget.item['level'] ?? 'N/A'}',
+                  style: TextStyle(fontSize: 16),
+                ),
+                Text(
+                  'スタイル: ${widget.item['style'] ?? 'N/A'}',
+                  style: TextStyle(fontSize: 16),
+                ),
+              ],
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SelectableText(
+                      widget.item['englishText'] ?? 'N/A',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    SizedBox(height: 10),
+                    SelectableText(
+                      widget.item['japaneseText'] ?? 'N/A',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ],
+                ),
               ),
-              Text(
-                '語数: ${widget.item['length'] ?? 'N/A'}',
-                style: TextStyle(fontSize: 16),
-              ),
-              Text(
-                'レベル: ${widget.item['level'] ?? 'N/A'}',
-                style: TextStyle(fontSize: 16),
-              ),
-              Text(
-                'スタイル: ${widget.item['style'] ?? 'N/A'}',
-                style: TextStyle(fontSize: 16),
-              ),
-              SelectableText(
-                widget.item['englishText'] ?? 'N/A',
-                style: TextStyle(fontSize: 20),
-              ),
-              SizedBox(height: 10),
-              SelectableText(
-                widget.item['japaneseText'] ?? 'N/A',
-                style: TextStyle(fontSize: 20),
-              ),
-              if (widget.item['audioPath'] != null)
-                AudioPlayerWidget(audioFilePath: widget.item['audioPath']),
-            ],
-          ),
+            ),
+            AudioPlayerWidget(audioFilePath: widget.item['audioPath']),
+          ],
         ),
       ),
     );

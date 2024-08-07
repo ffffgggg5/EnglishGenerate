@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'second_page.dart';
-import 'setting_page.dart'; // SettingsPageをインポート
-import 'list_page.dart'; // ListPageをインポート
-import 'custom_dropdown.dart'; // CustomDropdownをインポート
-import 'items.dart'; // itemsをインポート
-import 'database_helper.dart'; // DatabaseHelperをインポート
+import 'setting_page.dart';
+import 'list_page.dart';
+import 'custom_dropdown.dart';
+import 'items.dart';
+import 'database_helper.dart';
+import 'themes.dart'; // themes.dartをインポート
 import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart' as path_lib; // エイリアスを付ける
+import 'package:path/path.dart' as path_lib;
 
 Future<void> main() async {
   await dotenv.load(fileName: '.env');
@@ -45,6 +46,7 @@ class _TopPageState extends State<TopPage> {
   String dropdownValueLength = itemsLength.first;
   String dropdownValueLevel = itemsLevel.first;
   String dropdownValueStyle = itemsStyle.first;
+  List<String> randomThemes = []; // ランダムテーマのリスト
 
   final TextEditingController _controllerTheme = TextEditingController();
   bool isButtonEnabled = false;
@@ -61,10 +63,26 @@ class _TopPageState extends State<TopPage> {
     });
   }
 
+  // ランダムなテーマを生成するメソッド。ここで個数も設定してるっぽい
+  void _generateRandomThemes() {
+    setState(() {
+      randomThemes = List.generate(10, (_) => getRandomTheme());
+    });
+  }
+
+  // ランダムテーマボタンが押されたときにテーマを設定するメソッド
+  void _setRandomTheme(String theme) {
+    setState(() {
+      _controllerTheme.text = theme;
+      _checkIfButtonShouldBeEnabled();
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     _controllerTheme.addListener(_checkIfButtonShouldBeEnabled);
+    _generateRandomThemes(); // 初期化時にランダムテーマを生成
   }
 
   @override
@@ -117,6 +135,23 @@ class _TopPageState extends State<TopPage> {
                   _checkIfButtonShouldBeEnabled();
                 },
               ),
+              SizedBox(height: 10),
+              Wrap(
+                spacing: 8.0,
+                runSpacing: 4.0,
+                children: randomThemes.map((theme) {
+                  return ElevatedButton(
+                    onPressed: () => _setRandomTheme(theme),
+                    child: Text(theme),
+                  );
+                }).toList(),
+              ),
+              SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: _generateRandomThemes, // ランダムテーマ生成ボタン
+                child: Text('ランダムテーマをリセット'),
+              ),
+              SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
